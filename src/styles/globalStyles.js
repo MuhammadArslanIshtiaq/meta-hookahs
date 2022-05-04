@@ -130,7 +130,7 @@ export const Mint = styled.div`
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.7);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   @media screen and (max-width: 1024px) {
@@ -145,7 +145,7 @@ export const Mint = styled.div`
 
   @media screen and (max-width: 480px) {
     width: 95%;
-    margin-top:0vh;
+    margin-top: 0vh;
     padding: 20px 20px;
   }
 `;
@@ -206,13 +206,13 @@ export const connectButton = styled.button`
 `;
 
 export const maxButton = styled.button`
-  width: 20%;
-  background: #2ecc71;
+  width: 30%;
+  background: var(--accent-text);
   height: 50px;
   border-radius: 10px;
   font-family: "wonder";
   font-size: 1.5rem;
-  color: #fff !important ;
+  color: var(--secondary-text) !important ;
 
   @media screen and (max-width: 768px) {
     position: relative;
@@ -266,7 +266,7 @@ export const StyledRoundButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background:transparent;
+  background: transparent;
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;

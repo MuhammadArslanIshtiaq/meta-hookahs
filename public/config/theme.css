@@ -1,15 +1,15 @@
 :root {
-  --primary: #f7f7f7 !important;
+  --primary: #f3ba40 !important;
   --primary-text: #1a1a1a;
-  --secondary: #5fcde4;
+  --secondary: #5FCDE4;
   --secondary-text: #ffffff;
-  --accent: #505050;
-  --accent-text: #ffffff;
+  --accent: #ffffff;
+  --accent-text: #f3ba40;
 }
 
 body {
   /* background: #3491F9 !important; */
-  background-image: url("./images/bg.png") !important;
+  background-image: url("./images/bg.jpeg") !important;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;

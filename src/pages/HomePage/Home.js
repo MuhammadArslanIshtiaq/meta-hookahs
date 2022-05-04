@@ -5,23 +5,21 @@ import { fetchData } from "./../../redux/data/dataActions";
 import * as s from "./../../styles/globalStyles";
 import whitelistAddresses from "../walletAddresses";
 import Loader from "../../components/Loader/loader";
+import { NavLogo } from "../../components/Navbar/Navbar.element";
 
 const { createAlchemyWeb3, ethers } = require("@alch/alchemy-web3");
-var Web3 = require('web3');
-var Contract = require('web3-eth-contract');
-const { MerkleTree } = require('merkletreejs');
-const keccak256 = require('keccak256');
+var Web3 = require("web3");
+var Contract = require("web3-eth-contract");
+const { MerkleTree } = require("merkletreejs");
+const keccak256 = require("keccak256");
 
 // Whitelist MerkleTree
-const leafNodes = whitelistAddresses.map(addr => keccak256(addr));
+const leafNodes = whitelistAddresses.map((addr) => keccak256(addr));
 const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
 const rootHash = merkleTree.getRoot();
-console.log('Whitelist Merkle Tree\n', merkleTree.toString());
-
-
+console.log("Whitelist Merkle Tree\n", merkleTree.toString());
 
 function Home() {
-
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
@@ -99,36 +97,26 @@ function Home() {
       });
   };
 
-
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
     if (newMintAmount < 1) {
       newMintAmount = 1;
     }
     setMintAmount(newMintAmount);
-    setDisplayCost(
-      parseFloat(nftCost * newMintAmount).toFixed(2)
-    );
+    setDisplayCost(parseFloat(nftCost * newMintAmount).toFixed(2));
   };
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    newMintAmount > max
-      ? (newMintAmount = max)
-      : newMintAmount;
-    setDisplayCost(
-      parseFloat(nftCost * newMintAmount).toFixed(2)
-    );
+    newMintAmount > max ? (newMintAmount = max) : newMintAmount;
+    setDisplayCost(parseFloat(nftCost * newMintAmount).toFixed(2));
     setMintAmount(newMintAmount);
   };
 
   const maxNfts = () => {
     setMintAmount(max);
 
-    setDisplayCost(
-      parseFloat(nftCost * max).toFixed(2)
-    );
-
+    setDisplayCost(parseFloat(nftCost * max).toFixed(2));
   };
 
   const getData = async () => {
@@ -149,27 +137,29 @@ function Home() {
         const hexProof = merkleTree.getHexProof(claimingAddress);
         setProof(hexProof);
         let mintWL = merkleTree.verify(hexProof, claimingAddress, rootHash);
-        console.log({mintWL});
+        console.log({ mintWL });
         let mintWLContractMethod = await blockchain.smartContract.methods
           .isWhitelisted(blockchain.account, hexProof)
           .call();
         if (mintWLContractMethod && mintWL) {
           setCanMintWL(mintWL);
           console.log(mintWL);
-          setFeedback(`Welcome Whitelist Member, you can mint up to 2 NFTs`)
-          setDisable(false)
+          setFeedback(`Welcome Whitelist Member, you can mint up to 2 NFTs`);
+          setDisable(false);
         } else {
           setFeedback(`Sorry, your wallet is not on the whitelist`);
           setDisable(true);
         }
       } else {
-        setFeedback(`Welcome, you can mint up to 5 NFTs per transaction`)
+        setFeedback(`Welcome, you can mint up to 5 NFTs per transaction`);
       }
     }
   };
 
   const getDataWithAlchemy = async () => {
-    const web3 = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv");
+    const web3 = createAlchemyWeb3(
+      "https://eth-rinkeby.alchemyapi.io/v2/DWS-10QG2tUKcNhG_nUqMvkRQT8pwwyv"
+    );
     const abiResponse = await fetch("/config/abi.json", {
       headers: {
         "Content-Type": "application/json",
@@ -177,18 +167,17 @@ function Home() {
       },
     });
     const abi = await abiResponse.json();
-    var contract = new Contract(abi, '0x233e569Abe76E628E3B89D4BBCA4cfA37c1bca0c');
+    var contract = new Contract(
+      abi,
+      "0xEE858e36A9a647E9eDB74f1E11942Fe73464A100"
+    );
     contract.setProvider(web3.currentProvider);
     // Get Total Supply
-    const totalSupply = await contract.methods
-      .totalSupply()
-      .call();
+    const totalSupply = await contract.methods.totalSupply().call();
     setTotalSupply(totalSupply);
 
     // Get Contract State
-    let currentState = await contract.methods
-      .currentState()
-      .call();
+    let currentState = await contract.methods.currentState().call();
     setState(currentState);
     console.log(currentState);
 
@@ -197,37 +186,26 @@ function Home() {
     if (currentState == 0) {
       setStatusAlert("MINT NOT LIVE YET!");
       setDisable(true);
-      setDisplayCost(0.00);
+      setDisplayCost(0.0);
       setMax(0);
-    }
-    else if (currentState == 1) {
-      let wlCost = await contract.methods
-        .costWL()
-        .call();
+    } else if (currentState == 1) {
+      let wlCost = await contract.methods.costWL().call();
       setDisplayCost(web3.utils.fromWei(wlCost));
       setNftCost(web3.utils.fromWei(wlCost));
       setStatusAlert("WHITELIST IS NOW LIVE!");
       setFeedback("Are you Whitelisted Member?");
 
-      let wlMax = await contract.methods
-        .maxMintAmountWL()
-        .call();
+      let wlMax = await contract.methods.maxMintAmountWL().call();
       setMax(wlMax);
-    }
-    else {
-      let puCost = await contract.methods
-        .cost()
-        .call();
+    } else {
+      let puCost = await contract.methods.cost().call();
       setDisplayCost(web3.utils.fromWei(puCost));
       setNftCost(web3.utils.fromWei(puCost));
       setStatusAlert("Public Mint is Live");
-      let puMax = await contract.methods
-        .maxMintAmountPublic()
-        .call();
+      let puMax = await contract.methods.maxMintAmountPublic().call();
       setMax(puMax);
     }
-
-  }
+  };
 
   const getConfig = async () => {
     const configResponse = await fetch("/config/config.json", {
@@ -254,17 +232,15 @@ function Home() {
 
   return (
     <>
-     
-        {loading && <Loader />}
+      {loading && <Loader />}
 
-      <s.FlexContainer jc={"center"} ai={"center"} fd={"row"}
-      >
+      <s.FlexContainer jc={"center"} ai={"center"} fd={"row"}>
         <s.Mint>
+          <NavLogo alt={"logo"} src={"config/images/logo.png"}></NavLogo>
           <s.TextTitle
             size={3.0}
             style={{
               letterSpacing: "3px",
-
             }}
           >
             {statusAlert}
@@ -281,7 +257,6 @@ function Home() {
           <s.Line />
           <s.SpacerSmall />
           <s.FlexContainer fd={"row"} ai={"center"} jc={"space-between"}>
-
             <s.TextTitle>Amount</s.TextTitle>
 
             <s.AmountContainer ai={"center"} jc={"center"} fd={"row"}>
@@ -331,11 +306,11 @@ function Home() {
           </s.FlexContainer>
           <s.SpacerSmall />
           <s.Line />
-        
+
           <s.SpacerLarge />
           {blockchain.account !== "" &&
-            blockchain.smartContract !== null &&
-            blockchain.errorMsg === "" ? (
+          blockchain.smartContract !== null &&
+          blockchain.errorMsg === "" ? (
             <s.Container ai={"center"} jc={"center"} fd={"row"}>
               <s.connectButton
                 disabled={disable}
@@ -345,7 +320,6 @@ function Home() {
                   getData();
                 }}
               >
-
                 {claimingNft ? "Confirm Transaction in Wallet" : "Mint"}
                 {/* {mintDone && !claimingNft  ? feedback : ""} */}
               </s.connectButton>{" "}
