@@ -70,6 +70,7 @@ export const TextTitle = styled.p`
   @media only screen and (max-width: 768px) {
     font-size: 2.1rem;
     line-height: 1.5;
+    margin: 0 auto;
   }
 `;
 
