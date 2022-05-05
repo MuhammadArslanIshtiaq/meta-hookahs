@@ -122,31 +122,19 @@ export const row = styled.div`
 `;
 
 export const Mint = styled.div`
-  padding: 25px 40px;
+  padding: 40px 80px;
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 25px;
   width: 40%;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   @media screen and (max-width: 1024px) {
-    width: 80%;
-    margin-top: 25vh;
-  }
-
-  @media screen and (max-width: 768px) {
     width: 95%;
-    margin-top: 20vh;
+    margin-top: 10vh;
   }
 
   @media screen and (max-width: 480px) {
-    width: 95%;
-    margin-top: 0vh;
-    padding: 20px 20px;
+    width: 90%;
+    margin: 5vh 0;
   }
 `;
 
@@ -218,6 +206,10 @@ export const maxButton = styled.button`
     position: relative;
     margin-left: auto;
     margin-bottom: 10px;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 40%;
   }
 `;
 
