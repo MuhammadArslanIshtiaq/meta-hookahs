@@ -1,4 +1,4 @@
-# BeLeeWorld Minting NFT's Mint Page
+# Metabeez Minting NFT's Mint Page
 
 
 ## Website Link
@@ -7,7 +7,7 @@
 
 # Fleek Web access
 
-https://little-mode-6846.on.fleek.co/
+https://green-wildflower-3143.on.fleek.co/
 
 ## Installation
 
