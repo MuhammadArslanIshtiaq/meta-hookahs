@@ -1,10 +1,10 @@
 import { createGlobalStyle } from "styled-components";
-import wonder from "./fonts/wonder.otf";
+import acme from "./fonts/acme.ttf";
 const FontStyles = createGlobalStyle`
 
 @font-face {
-  font-family: 'wonder';
-  src: url(${wonder}) format('openType');
+  font-family: 'acme';
+  src: url(${acme}) format('openType');
   font-weight: 300;
   font-style: normal;
 }

@@ -37,14 +37,14 @@ export const NavContainer = styled.div`
 `;
 
 export const NavLogo = styled.img`
-  width: 120px;
+  width: 50px;
   display: flex;
   align-items: center;
   margin: 10px auto;
   padding-bottom: 2vh;
   @media (min-width: 767px) {
-    width: 150px;
-    margin-top: 50px;
+    width: 80px;
+    margin-top: 10px;
   }
 `;
 
@@ -110,7 +110,7 @@ export const NavLink = styled(LinkS)`
   padding: 0 1rem;
   display: flex;
   cursor: pointer;
-  font-family: "wonder";
+  font-family: "acme";
   font-size: 1.5rem;
   &:hover {
     color: #dbac36;
@@ -138,7 +138,7 @@ export const StyledButton = styled.button`
   color: var(--primary-text);
   margin-top: 1.1vw;
   cursor: pointer;
-  font-family: "wonder";
+  font-family: "acme";
   transition: 0.5s all ease-in-out;
   font-size: 1.2rem;
   background: transparent;

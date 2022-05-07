@@ -1,10 +1,10 @@
 :root {
-  --primary: #f3ba40 !important;
-  --primary-text: #1a1a1a;
-  --secondary: #5FCDE4;
-  --secondary-text: #ffffff;
-  --accent: #ffffff;
-  --accent-text: #f3ba40;
+  --primary: #fff !important;
+  --primary-text: #fff;
+  --secondary: #f5a144;
+  --secondary-text: #a5307a;
+  --b-grad: linear-gradient(90deg, rgba(245, 161, 68,1) 20.375%,rgba(244, 160, 68,1) 20.375%,rgba(165, 48, 122,1) 80.375%) 1;
+ 
 }
 
 body {

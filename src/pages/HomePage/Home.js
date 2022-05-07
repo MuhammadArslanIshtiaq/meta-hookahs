@@ -169,7 +169,7 @@ function Home() {
     const abi = await abiResponse.json();
     var contract = new Contract(
       abi,
-      "0xEE858e36A9a647E9eDB74f1E11942Fe73464A100"
+      "0x0217E6A34C098C44044433E10AB5fc66713c6780"
     );
     contract.setProvider(web3.currentProvider);
     // Get Total Supply
@@ -234,7 +234,13 @@ function Home() {
     <>
       {loading && <Loader />}
 
-      <s.FlexContainer jc={"center"} ai={"center"} fd={"row"}>
+      <s.FlexContainer
+        jc={"center"}
+        ai={"start"}
+        fd={"row"}
+        mt={"5vh"}
+        mb={"5vh"}
+      >
         <s.Mint>
           <NavLogo alt={"logo"} src={"config/images/logo.png"}></NavLogo>
           <s.TextTitle

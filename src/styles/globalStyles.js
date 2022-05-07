@@ -63,7 +63,7 @@ export const TextTitle = styled.p`
   font-size: ${({ size }) => (size ? size + "rem" : "2.2rem")};
   font-weight: 500;
   line-height: 1.1;
-  font-family: "wonder";
+  font-family: "acme";
   text-align: center;
   color: var(--primary) !important ;
 
@@ -77,7 +77,7 @@ export const TextTitle = styled.p`
 export const TextSubTitle = styled.p`
   color: ${({ color }) => (color ? color : "#fff")};
   font-size: ${({ size }) => (size ? size + "rem" : "1.5rem")};
-  font-family: "wonder";
+  font-family: "acme";
   text-align: ${({ align }) => (align ? align : "center")};
 `;
 
@@ -85,7 +85,7 @@ export const TextDescription = styled.p`
   color: ${({ color }) => (color ? color : "#fff")};
   font-size: ${({ size }) => (size ? size : "1.5rem")};
   line-height: 1.6;
-  font-family: "wonder";
+  font-family: "acme";
   text-align: center;
   width: 90%;
   display: block;
@@ -123,10 +123,10 @@ export const row = styled.div`
 `;
 
 export const Mint = styled.div`
-  padding: 40px 80px;
+  padding: 10px 80px;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 25px;
-  width: 40%;
+  width: 50%;
 
   @media screen and (max-width: 1024px) {
     width: 95%;
@@ -172,8 +172,9 @@ export const FlexContainer = styled.div`
   flex-direction: ${({ fd }) => (fd ? fd : "column")};
   justify-content: ${({ jc }) => (jc ? jc : "flex-start")};
   align-items: ${({ ai }) => (ai ? ai : "flex-start")};
+  margin-top: ${({ mt }) => (mt ? mt : "5px")};
+  margin-bottom: ${({ mb }) => (mb ? mb : "5px")};
   flex-wrap: wrap;
-  margin-top: ${({ mt }) => (mt ? mt : "0")};
 `;
 
 export const FlexItem = styled.div`
@@ -186,22 +187,28 @@ export const connectButton = styled.button`
   padding: 10px;
   background-color: transparent;
   color: var(--primary);
-  font-family: "wonder";
+  font-family: "acme";
   text-align: center;
   font-size: 1.5rem;
-  border: 1px solid var(--primary);
+  border: 2px solid;
+  border-image: var(--b-grad);
   border-radius: 10px;
   cursor: pointer;
 `;
 
 export const maxButton = styled.button`
   width: 30%;
-  background: var(--accent-text);
+  background: linear-gradient(
+    90deg,
+    rgba(245, 161, 68, 1) 20.375%,
+    rgba(244, 160, 68, 1) 20.375%,
+    rgba(165, 48, 122, 1) 80.375%
+  );
   height: 50px;
   border-radius: 10px;
-  font-family: "wonder";
+  font-family: "acme";
   font-size: 1.5rem;
-  color: var(--secondary-text) !important ;
+  color: var(--primary-text) !important ;
 
   @media screen and (max-width: 768px) {
     position: relative;
